@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
+// TODO delete
+// const config = require('config');
 const { body, validationResult } = require('express-validator');
+require('dotenv').config();
 
 const auth = require('../../middleware/auth');
 
@@ -66,7 +68,7 @@ router.post(
       // sign the token
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        process.env.JWT_SECRET,
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
@@ -74,7 +76,7 @@ router.post(
         }
       );
     } catch (err) {
-      console.error({ message });
+      console.error(err.message);
       res.status(500).send('Server Error');
     }
   }
