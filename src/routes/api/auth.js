@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// TODO delete
-// const config = require('config');
 const { body, validationResult } = require('express-validator');
 require('dotenv').config();
 
